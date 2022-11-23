@@ -6,17 +6,27 @@ int main(){
     scanf("%d",&a);
     printf("Vedite chislo stolbcov:");
     scanf("%d",&b);
+
     int arr[a][b];
+
+    //ввод в мссив элементов
     for (int i = 0; i < a; i++){ //проход строка
         for (int j = 0; j < b; j++){ //проход столбец
             printf("[%d][%d]:",i,j);
             scanf("%d", &arr[i][j]);
             }
     }
+
+
+    //печать массива
     for (int i = 0; i < a; i++){ //проход строк
-        printf("\n");
-        for (int j = 0; j < b; j++) //проход столбов
+        printf("\n|");
+        for (int j = 0; j < b; j++){ //проход столбов
             printf("%d ", arr[i][j]);
+            if(j == b-1){
+                printf("|");
+            }
+        }
 
     }
 }

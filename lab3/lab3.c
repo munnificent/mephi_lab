@@ -3,71 +3,75 @@
 #include <locale.h>
 #include <windows.h>
 
-static int value = 1;
-
-int print_menu(int index) {
-    if (index > 4 || index < 0) return 0;
-    (index == 1) ? printf("First            @\n") : printf("First           \n");
-    (index == 2) ? printf("Second           @\n") : printf("Second          \n");
-    (index == 3) ? printf("Third            @\n") : printf("Third           \n");
-    (index == 4) ? printf("Forth            @\n") : printf("Forth           \n");
+void print_menu1() {
+    setlocale(LC_ALL, "Rus");
+    system("cls");  // очищаем экран
+    printf("Действия\n");
+    printf("1.Ввести данные массива\n");
+    printf("2.Вывести исходный массив\n");
+    printf("3.Вывести итоговый массив\n");
+    printf("4. Выход\n");
+    printf(">");
 }
 
-void selected(int button) {
-    system("cls");
-    printf("##################\n");
-    printf("# %d was selected #\n", button);
-    printf("##################\n");
-    getch();
+int get_variant(int count) {
+    int variant;
+    char s[100]; // строка для считывания введённых данных
+    scanf("%s", s); // считываем строку
+
+    // пока ввод некорректен, сообщаем об этом и просим повторить его
+    while (sscanf(s, "%d", &variant) != 1 || variant < 1 || variant > count) {
+        printf("Incorrect input. Try again: "); // выводим сообщение об ошибке
+        scanf("%s", s); // считываем строку повторно
+    }
+
+    return variant;
 }
 
-int button_process() {
-
-    char ch = '0';
-    while (!kbhit());
-    ch = getch();
-    switch (ch) {
-        case '1':
-            value = ch - 0x30;
-            selected(value);
-            break;
-        case '2':
-            value = ch - 0x30;
-            selected(value);
-            break;
-        case '3':
-            value = ch - 0x30;
-            selected(value);
-            break;
-        case '4':
-            value = ch - 0x30;
-            selected(value);
-            break;
-    }
-    if (ch == 72) {
-        //Arrow up
-        value -= 1;
-        if (value == 0) value = 4;
-    }
-    else if (ch == 80) {
-        //Arrow down
-        value += 1;
-        if (value == 5) value = 1;
-    }
-    else if (ch == 13) {
-        // Enter button
-        selected(value);
-    }
-    return value;
+void add_arr(int *size, int *capacity) {
+    int a , b ; //кол-во строк и столбцов
+    printf("Vedite chislo ctrok:");
+    scanf("%d",&(*size));
+    printf("Vedite chislo stolbcov:");
+    scanf("%d",&(*capacity));
 }
 
-int main()
-{
-    int button = 1;
-    while (1) {
-        print_menu(button);
-        button = button_process();
-        system("cls");
-    }
-    system("PAUSE");
+void print_num(int size, int capacity) {
+    // реализация процедуры
+    printf("%d %d", size,capacity );
+}
+void print_arr(int size){
+    printf("in progress");
+}
+
+int main() {
+    int variant; // выбранный пункт меню
+    int size = 0; // строки
+    int capacity = 1; // столбци
+
+
+    do {
+        print_menu1(); // выводим меню на экран
+
+        variant = get_variant(4); // получаем номер выбранного пункта меню
+
+        switch (variant) {
+            case 1:
+                add_arr(&size, &capacity);
+                break;
+
+            case 2:
+                print_num(size, capacity);
+                break;
+
+            case 3:
+                print_arr(size);
+                break;
+        }
+
+        if (variant != 4)
+            system("pause"); // задерживаем выполнение, чтобы пользователь мог увидеть результат выполнения выбранного пункта
+    } while (variant != 4);
+
+    return 0;
 }
