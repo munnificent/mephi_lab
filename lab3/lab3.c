@@ -1,35 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
-#include <windows.h>
 
 void print_menu1() {
-    setlocale(LC_ALL, "Rus");
-    system("cls");  // очищаем экран
-    printf("Действия\n");
-    printf("1.Ввести данные массива\n");
-    printf("2.Вывести исходный массив\n");
-    printf("3.Вывести итоговый массив\n");
-    printf("4. Выход\n");
+    system("cls");
+    printf("Viberite punkt\n");
+    printf("1. Sothdat massiv\n");
+    printf("2. Vvesti niviy element\n");
+    printf("3. Udalenie elementa\n");
+    printf("4. Etog funkcie\n");
+    printf("5. Exit\n");
     printf(">");
 }
 
 int get_variant(int count) {
     int variant;
-    char s[100]; // строка для считывания введённых данных
-    scanf("%s", s); // считываем строку
+    char s[100];
+    scanf("%s", s);
 
-    // пока ввод некорректен, сообщаем об этом и просим повторить его
     while (sscanf(s, "%d", &variant) != 1 || variant < 1 || variant > count) {
-        printf("Incorrect input. Try again: "); // выводим сообщение об ошибке
-        scanf("%s", s); // считываем строку повторно
+        printf("Incorrect input. Try again: ");
+        scanf("%s", s);
     }
 
     return variant;
 }
 
 void add_arr(int *size, int *capacity) {
-    int a , b ; //кол-во строк и столбцов
+    int a , b ;
     printf("Vedite chislo ctrok:");
     scanf("%d",&(*size));
     printf("Vedite chislo stolbcov:");
@@ -37,7 +34,6 @@ void add_arr(int *size, int *capacity) {
 }
 
 void print_num(int size, int capacity) {
-    // реализация процедуры
     printf("%d %d", size,capacity );
 }
 void print_arr(int size){
@@ -45,15 +41,15 @@ void print_arr(int size){
 }
 
 int main() {
-    int variant; // выбранный пункт меню
-    int size = 0; // строки
-    int capacity = 1; // столбци
+    int variant;
+    int size = 0;
+    int capacity = 1;
 
 
     do {
-        print_menu1(); // выводим меню на экран
+        print_menu1();
 
-        variant = get_variant(4); // получаем номер выбранного пункта меню
+        variant = get_variant(5);
 
         switch (variant) {
             case 1:
@@ -67,11 +63,15 @@ int main() {
             case 3:
                 print_arr(size);
                 break;
+
+            case 4:
+                print_arr(size);
+                break:
         }
 
-        if (variant != 4)
-            system("pause"); // задерживаем выполнение, чтобы пользователь мог увидеть результат выполнения выбранного пункта
-    } while (variant != 4);
+        if (variant != 5)
+            system("pause");
+             } while (variant != 5);
 
     return 0;
 }
