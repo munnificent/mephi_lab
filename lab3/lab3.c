@@ -3,11 +3,11 @@
 
 void print_menu1() {
     system("cls");
-    printf("Viberite punkt\n");
-    printf("1. Sothdat massiv\n");
-    printf("2. Vvesti niviy element\n");
-    printf("3. Udalenie elementa\n");
-    printf("4. Etog funkcie\n");
+    printf("Menu\n");
+    printf("1. Make massive\n");
+    printf("2. Replace element in massive\n");
+    printf("3. Delet element\n");
+    printf("4. Result\n");
     printf("5. Exit\n");
     printf(">");
 }
@@ -25,53 +25,62 @@ int get_variant(int count) {
     return variant;
 }
 
-void add_arr(int *size, int *capacity) {
-    int a , b ;
-    printf("Vedite chislo ctrok:");
-    scanf("%d",&(*size));
-    printf("Vedite chislo stolbcov:");
+void add_arr(int *capacity, int *arr) {
+    printf("Enter element number:");
     scanf("%d",&(*capacity));
+    printf("Capa %d",*capacity);;
+    *arr =  arr[*capacity];
+
+    if (*arr == NULL) {
+        printf("Allocation error.");
+    }
+
+    for (int j = 0; j < *capacity; j++){ //проход столбец
+            printf("[%d]:",j);
+            scanf("%d", arr[j]);
+            }
 }
 
-void print_num(int size, int capacity) {
+void del_num(int size, int capacity) {
     printf("%d %d", size,capacity );
 }
-void print_arr(int size){
-    printf("in progress");
+void print_arr(int capacity,int *arr){
+    printf("in progress\n");
+    for (int j = 0; j < capacity; j++){ //проход столбов
+            printf("%d ", arr[j]);
+            }
 }
 
 int main() {
     int variant;
-    int size = 0;
     int capacity = 1;
+    int *arr;
 
 
     do {
         print_menu1();
 
         variant = get_variant(5);
-
         switch (variant) {
             case 1:
-                add_arr(&size, &capacity);
+                add_arr(&capacity, arr);
                 break;
 
-            case 2:
-                print_num(size, capacity);
+            /*case 2:
+                add_num(size, capacity);
                 break;
-
+*/
             case 3:
-                print_arr(size);
+                del_arr(capacity, arr);
                 break;
 
             case 4:
-                print_arr(size);
-                break:
+                print_arr(capacity, arr);
+                break;
         }
 
         if (variant != 5)
             system("pause");
              } while (variant != 5);
-
     return 0;
 }

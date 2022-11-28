@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1669558386 source:c:\users\munificent\documents\github\mephi_lab\test\lab\lab33\test3.c
+	<stdio.h.>
+	"saless.h"
+	<stdlib.h>
+
+1669532941 c:\users\munificent\documents\github\mephi_lab\test\lab\lab33\saless.h
+
+1669533074 source:c:\users\munificent\documents\github\mephi_lab\test\lab33\samefun.c
+	<stdio.h>
+	"saless.h"
+
+1669532941 c:\users\munificent\documents\github\mephi_lab\test\lab33\saless.h
+
+1669558386 source:c:\users\munificent\documents\github\mephi_lab\test\lab33\test3.c
+	<stdio.h.>
+	"saless.h"
+	<stdlib.h>
+
