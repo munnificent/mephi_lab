@@ -103,23 +103,21 @@ void print_arr(int capacity, int **arr)
      return *(int*)a - *(int*)b;
  }
 
- void make_test(int capacity, int *fin, int **arr, int **arr1){
-    int k=0,curr,next,flag;
-    qsort(*arr, capacity, sizeof(int), cmp );
-    for(int i = 0; i <=7;i++){
+ void make_test(int *capacity, int *fin, int **arr, int **arr1){
+    int tmp,k=0,curr,next,flag;
+    qsort(*arr, *capacity, sizeof(int), cmp );
+    for(int i = 0; i <=*capacity;i++){
         curr = (*arr)[i];
-        for(int j=0;j<=7;j++){
-            next=(*arr)[j];
+        for(int start=0;start<=*capacity;start++){
+            next=(*arr)[start];
             flag = samles(curr,next);
-            if(flag == 1 && i != j){
-                *arr1 = (int*)realloc(*arr1,(k+1)* sizeof(int));
-                (*arr1)[k]=curr;
-                k++;
+            if(flag == 1 && i != start ){
                 *arr1 = (int*)realloc(*arr1,(k+1)* sizeof(int));
                 (*arr1)[k]=next;
-                *fin=k+1;
                 k++;
-            }
+                *fin=k;
+
+                }
             }
         }
     }

@@ -7,7 +7,7 @@ int main()
 	int variant,menu;
 	int fin = 1,capacity = 1;
 	int *arr = (int *)malloc(capacity * sizeof(int));
-	int *arr1 = (int *)malloc(capacity * sizeof(int));
+	int *arr1 = (int *)malloc(fin * sizeof(int));
 
 	do
 	{
@@ -43,14 +43,14 @@ int main()
 			break;
 
         case 5:
-			make_test(capacity, &fin, &arr, &arr1);
+			make_test(&capacity, &fin, &arr, &arr1);
 			break;
 		}
 
 		if (variant != 6)
 			system("pause");
 	} while (variant != 6);
-            free(arr);
-            free(arr1);
+    free(arr);
+    free(arr1);
 	return 0;
 }
