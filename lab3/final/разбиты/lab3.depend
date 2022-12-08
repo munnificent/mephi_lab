@@ -1,24 +1,12 @@
 # depslib dependency file v1.0
-1670027339 source:c:\users\munificent\downloads\lab3\func.c
+1670514068 source:c:\users\munificent\downloads\lab3\func.c
 	<stdio.h>
 	<stdlib.h>
 	"laber.h"
 
-1670027339 c:\users\munificent\downloads\lab3\laber.h
+1670514434 c:\users\munificent\downloads\lab3\laber.h
 
-1670028989 source:c:\users\munificent\downloads\lab3\main.c
-	<stdio.h>
-	<stdlib.h>
-	"laber.h"
-
-1670149557 source:c:\users\munificent\downloads\mephi_lab-main (1)\mephi_lab-main\lab3\final\разбиты\func.c
-	<stdio.h>
-	<stdlib.h>
-	"laber.h"
-
-1670149530 c:\users\munificent\downloads\mephi_lab-main (1)\mephi_lab-main\lab3\final\разбиты\laber.h
-
-1670149507 source:c:\users\munificent\downloads\mephi_lab-main (1)\mephi_lab-main\lab3\final\разбиты\main.c
+1670514434 source:c:\users\munificent\downloads\lab3\main.c
 	<stdio.h>
 	<stdlib.h>
 	"laber.h"

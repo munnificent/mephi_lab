@@ -2,6 +2,35 @@
 #include <stdlib.h>
 #include "laber.h"
 
+void restart(int *capacity, int *fin, int **arr, int **arr1){
+    *fin=1;
+    *capacity=1;
+    free(*arr);
+    free(*arr1);
+    *arr = (int *)malloc(*capacity * sizeof(int));
+	*arr1 = (int *)malloc(*fin * sizeof(int));
+}
+
+void dup(int ***arr, int **listLength)
+{
+    int i=0;
+	while(i < **listLength-1)
+	{
+		if ((**arr)[i] == (**arr)[i+1])
+		{
+			for (int j = i; j < (**listLength - 1); j++)
+        {
+		(**arr)[j] = (**arr)[j + 1];
+        }
+			**listLength -= 1;
+
+            **arr = (int *)realloc(**arr, **listLength * sizeof(int));
+		} else {
+		i++;
+		}
+	}
+}
+
 int len(int a){
     int i;
     for(i = 0; a != 0 ; i++)
@@ -18,6 +47,7 @@ void print_menu1(){
 	printf("4. Result\n");
 	printf("5. Personal exercise\n");
 	printf("6. Exit\n");
+	printf("8. Restart\n");
 	printf(">");
 }
 
@@ -68,11 +98,10 @@ void del_num(int *capacity, int **arr){
     printf("capa %d",*capacity);
     printf("Enter element to delete:");
     scanf("%d",&part1);
-    for( int j = part1; j < *capacity-1; j++ ){
-            printf("mass %d",(*arr)[part1]);
-            (*arr)[part1] = (*arr)[part1+1];
-            part1++;
-    }
+    for (int j = part1; j < *capacity - 1; j++)
+        {
+		(*arr)[j] = (*arr)[j + 1];
+        }
     *capacity-=1;
     printf(" new capacity: %d",*capacity);
     *arr = (int*)realloc(*arr,*capacity * sizeof(int));
@@ -99,31 +128,50 @@ void print_arr(int capacity, int **arr)
 	}
 }
 
- int cmp(const void *b, const void *a) {
+void sorter(int ***list, int **listLength)
+{
+	int tmp;
+	for (int i = 1; i < **listLength; i++)
+	{
+		int j = i - 1;
+		while (j >= 0 && (**list)[j] > (**list)[j + 1])
+		{
+			tmp = (**list)[j];
+			(**list)[j] = (**list)[j + 1];
+			(**list)[j + 1] = tmp;
+			j--;
+		}
+	}
+}
+int cmp(const void *b, const void *a) {
      return *(int*)a - *(int*)b;
  }
 
- void make_test(int *capacity, int *fin, int **arr, int **arr1){
-    int tmp,k=0,curr,next,flag;
-    qsort(*arr, *capacity, sizeof(int), cmp );
-    for(int i = 0; i <=*capacity;i++){
+ void make_test(int capacity, int *fin, int **arr, int **arr1){
+    int k=0,curr,next,flag;
+    qsort(*arr, capacity, sizeof(int), cmp );
+    for(int i = 0; i <=7;i++){
         curr = (*arr)[i];
-        for(int start=0;start<=*capacity;start++){
-            next=(*arr)[start];
+        for(int j=0;j<=7;j++){
+            next=(*arr)[j];
             flag = samles(curr,next);
-            if(flag == 1 && i != start ){
+            if(flag == 1 && i != j){
+                *arr1 = (int*)realloc(*arr1,(k+1)* sizeof(int));
+                (*arr1)[k]=curr;
+                k++;
                 *arr1 = (int*)realloc(*arr1,(k+1)* sizeof(int));
                 (*arr1)[k]=next;
                 k++;
                 *fin=k;
-
-                }
+            }
             }
         }
+        sorter(&arr1, &fin);
+        dup(&arr1, &fin);
     }
 
 int samles(int a, int b){
-    int temp,clone,flag=1,num1,num2;
+    int clone,flag=1,num1,num2;
   if(len(a)==len(b)){
   while (a!=0){
     if(flag == 1){
