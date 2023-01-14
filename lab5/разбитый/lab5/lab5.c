@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "road.h"
-typedef struct
+typedef struct car
 {
     char mark[16];
     char name[100];
-    int kilo;
+    float  kilo;
 } car;
 
 void print_menu() {
@@ -21,7 +21,7 @@ void print_goods(car *cars, int size) {
         printf("|            No cars was added...          |\n");
     }
     for (int i = 0; i < size; i++){
-        printf("| %s | %s | %d |\n", (cars)[i].mark,(cars)[i].name, (cars)[i].kilo);
+        printf("| %s | %s | %f |\n", (cars)[i].mark,(cars)[i].name, (cars)[i].kilo);
     }
 }
 
@@ -29,6 +29,7 @@ void make_test(car **cars, int size);
 int sortq_num(const void *a, const void *b);
 void add_good(car **cars, int *size, int *capacity);
 int str_cmp(const void* a, const void* b);
+int cmp(const void *a, const void *b);
 
 
 int main(){
@@ -52,7 +53,7 @@ int main(){
                 break;
 
             case 3:
-                make_test(&cars, size);
+                qsort(cars, size, sizeof(struct car *), cmp);
                 break;
         }
     }while(variant !=4);
@@ -63,19 +64,23 @@ int sortq_num(const void *a, const void *b) {
      return *(int*)a - *(int*)b;
  }
 
-int sortq_str(const void* a, const void* b) {
-    return strcmp(((car*)a)->mark, ((car*)b)->mark);
+int cmp(const void *a, const void *b)
+{
+    const struct car *left  = *(const struct car **)a;
+    const struct car *right = *(const struct car **)b;
+
+    return (right->kilo < left->kilo) - (left->kilo < right->kilo);
 }
 
 
  void make_test(car **cars, int size){
-  //qsort(&(**cars).mark, size, sizeof(char), sortq_str);
-  char *tmp;
-  for(int i=0;i < size-1;i++){
-    tmp=(*cars)[i].mark;
+  qsort(&(**cars), size, sizeof(struct car *), cmp);
+  //char *tmp;
+  //for(int i=0;i < size-1;i++){
+    //tmp=(*cars)[i].mark;
     //(*cars)[i].mark=(*cars)[i+1].mark;
     //(*cars)[i+1].mark=tmp;
-  }
+  //}
 }
 
 void add_good(car **cars, int *size, int *capacity) {
@@ -84,7 +89,7 @@ void add_good(car **cars, int *size, int *capacity) {
     printf("Enter good name: ");
     scanf("%s", &(*cars)[*size].name);
     printf("Enter car distance: ");
-    scanf("%d", &(*cars)[*size].kilo);
+    scanf("%f", &(*cars)[*size].kilo);
     (*size)++;
     if (*size >= *capacity) {
         *capacity *= 3;
