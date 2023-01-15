@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct
+typedef struct car
 {
     char mark[16];
     char name[100];

@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
+#include "road.h"
 
 
-
-void binsertion_binary(int **cars, int size){
+void binsertion_binary(int **cars, int size){//variant1
      int i, j, m, left, right, x;
     for (i=1; i < size; i++){
         x=(*cars)[i];
@@ -25,22 +24,22 @@ void binsertion_binary(int **cars, int size){
 }
     }
 
-void sort_bin(int **data, int size){
+void sort_bin(int **data, int size){//variant2
         int i;
         for (i = 0; i < size; i++) {
                 int pos = -1;
                 int start = 0;
                 int end = i - 1;
                 int numToInsert = (*data)[i];
-                // Находим место вставки с помощью бинарного поиска
+                // пока есть что просматривать
                 while (start <= end && !(pos != -1)) {
-                        int middle = (start + end) / 2;
-                        if (numToInsert > (*data)[middle]) {
+                        int middle = (start + end) / 2;//делим интервал поиска пополам
+                        if (numToInsert > (*data)[middle]) {// будем искать в левой
                                 start = middle + 1;
-                        } else if (numToInsert < (*data)[middle]) {
+                        } else if (numToInsert < (*data)[middle]) {//искать надо в правой части
                                 end = middle - 1;
                         } else {
-                                pos = middle;
+                                pos = middle;//нашли себя
                         }
                 }
                 if(end < 0){
@@ -106,20 +105,18 @@ void add_arr(int *capacity,int **arr){
 	}
 }
 
-int main(){
-    int capacity = 1;
-    int *arr = (int *)malloc(capacity * sizeof(int));
-    switch (1 )
-		{
-		case 1:
-			add_arr(&capacity,&arr);
-			break;
-		}
-    ShakerSort(&arr,capacity);
-        printf("\n Final:");
-    for (int j = 0; j < capacity; j++)
-	{
-		printf("[%d] ",(arr)[j]);
-	}
 
+
+
+
+int get_variant(int count) {
+    int variant;
+    char s[100];
+    scanf("%s", s);
+    while (sscanf(s, "%d", &variant) != 1 || variant < 1 || variant > count) {
+        printf("Incorrect input. Try again: ");
+        scanf("%s", s);
+    }
+
+    return variant;
 }
