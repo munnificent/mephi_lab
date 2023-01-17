@@ -43,7 +43,7 @@ int main()
 			break;
 
         case 5:
-			make_test(capacity, &fin, &arr, &arr1);
+			make_test(&capacity, &fin, &arr, &arr1);
 			break;
 
         case 8:
